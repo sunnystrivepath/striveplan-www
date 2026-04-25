@@ -27,8 +27,12 @@ Just edit `index.html`. Search for the section name in the HTML comments (e.g. `
 
 ## Things that need separate work before this represents 100% truth
 
-- **Testimonials** (Saumya K., Katty M., Maiya R.): need explicit consent from each named consultant.
 - **"College Scorecard, IPEDS"** in the data section: only Common Data Sets is partially seeded today; Scorecard + IPEDS integration is on the product roadmap.
 - **"Batched monthly refresh"**: not yet wired.
 - **Pricing** ($79/$199/Custom): subject to GTM decisions.
-- **CCPA compliance**: technical practices align, but customer-facing privacy policy + opt-out flow needs to be documented.
+
+## Compliance work the site doesn't promise yet (separate roadmap)
+
+- **CCPA compliance**: privacy policy + opt-out / data-deletion request flow. Removed from the page on 2026-04-25 since it isn't yet a documented practice; revisit when ready to make the claim.
+- **FERPA-aware practices**: technically aligned (RLS, audit log, soft delete, signed URLs) but not yet documented as a claim on the site.
+- **SOC 2**: only mentioned on the Enterprise pricing tier as part of the standard package; actual SOC 2 prep is a separate workstream.
