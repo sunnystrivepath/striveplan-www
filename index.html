@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrivePlan — Smarter college planning. Student-led. Consultant-powered.</title>
+    <meta name="description" content="The platform serious independent college consultants actually needed. Track courses, grades, activities, college planning, and family communications in one place.">
+    <meta property="og:title" content="StrivePlan — Smarter college planning">
+    <meta property="og:description" content="The platform serious consultants actually needed. Built by IECs who grew tired of juggling spreadsheets.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://striveplan.io">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --blue-light: #eff6ff;
+            --blue-mid: #dbeafe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --white: #ffffff;
+            --green: #10b981;
+            --amber: #f59e0b;
+            --serif: 'DM Serif Display', Georgia, serif;
+            --sans: 'DM Sans', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            color: var(--gray-900);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-mark {
+            width: 36px;
+            height: 36px;
+            background: var(--blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo-mark svg { width: 20px; height: 20px; }
+
+        .nav-logo-text {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            color: var(--gray-900);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover { color: var(--blue); }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s;
+            border: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--gray-700);
+        }
+
+        .btn-ghost:hover { color: var(--gray-900); background: var(--gray-100); }
+
+        .btn-primary {
+            background: var(--blue);
+            color: var(--white);
+            box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+        }
+
+        .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 4px 12px rgba(37,99,235,0.35); }
+
+        .btn-lg {
+            padding: 0.85rem 1.75rem;
+            font-size: 1rem;
+            border-radius: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--blue);
+            border: 1.5px solid var(--blue);
+        }
+
+        .btn-outline:hover { background: var(--blue-light); }
+
+        /* HERO */
+        .hero {
+            padding: 9rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--blue-light);
+            border: 1px solid var(--blue-mid);
+            color: var(--blue);
+            padding: 0.35rem 0.85rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-eyebrow-dot {
+            width: 6px; height: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--blue);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-trust {
+            margin-top: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+        .trust-avatars {
+            display: flex;
+        }
+
+        .trust-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .trust-avatar:first-child { margin-left: 0; }
+
+        /* HERO VISUAL */
+        .hero-visual {
+            position: relative;
+        }
+
+        .platform-preview {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .preview-bar {
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        .preview-header {
+            background: var(--blue);
+            padding: 1.25rem 1.25rem 1rem;
+            color: white;
+        }
+
+        .preview-student-name {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .preview-student-meta {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .preview-stat {
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 0.5rem 0.6rem;
+            text-align: center;
+        }
+
+        .preview-stat-val {
+            font-size: 1rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .preview-stat-label {
+            font-size: 0.65rem;
+            opacity: 0.75;
+        }
+
+        .preview-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--gray-200);
+            background: white;
+            overflow-x: auto;
+        }
+
+        .preview-tab {
+            padding: 0.65rem 0.85rem;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .preview-tab.active {
+            color: var(--blue);
+            border-bottom-color: var(--blue);
+        }
+
+        .preview-body {
+            padding: 1rem 1.25rem;
+        }
+
+        .preview-section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-500);
+            margin-bottom: 0.6rem;
+        }
+
+        .preview-course-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.78rem;
+        }
+
+        .preview-course-row:last-child { border: none; }
+
+        .preview-course-name { color: var(--gray-700); font-weight: 500; }
+
+        .preview-course-type {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .type-ap { background: #dbeafe; color: #1d4ed8; }
+        .type-honors { background: #fef3c7; color: #92400e; }
+        .type-regular { background: var(--gray-100); color: var(--gray-500); }
+
+        .preview-grade {
+            font-weight: 700;
+            font-size: 0.8rem;
+            width: 2rem;
+            text-align: right;
+        }
+
+        .grade-a { color: #059669; }
+        .grade-b { color: #d97706; }
+
+        .float-badge {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            font-size: 0.78rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .float-badge-1 {
+            bottom: -1.5rem;
+            left: -2rem;
+            animation: float1 4s ease-in-out infinite;
+        }
+
+        .float-badge-2 {
+            top: 2rem;
+            right: -2rem;
+            animation: float2 5s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        .badge-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .badge-text-main { font-weight: 600; color: var(--gray-900); }
+        .badge-text-sub { color: var(--gray-500); font-size: 0.7rem; }
+
+        /* LOGOS */
+        .logos-strip {
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .logos-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-500);
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .logos-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-school {
+            font-family: var(--serif);
+            font-size: 1rem;
+            color: var(--gray-300);
+            font-style: italic;
+            letter-spacing: -0.01em;
+        }
+
+        /* FEATURES */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: 2.75rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* FEATURE GRID */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--blue);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--blue-mid);
+            box-shadow: 0 8px 32px rgba(37,99,235,0.08);
+            transform: translateY(-2px);
+        }
+
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            background: var(--blue-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-title {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            color: var(--gray-900);
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            line-height: 1.65;
+        }
+
+        /* FEATURE CARD WIDE */
+        .feature-card-wide {
+            grid-column: span 2;
+        }
+
+        /* HOW IT WORKS */
+        .how-section {
+            background: var(--gray-50);
+            padding: 6rem 2rem;
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .how-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: calc(12.5% + 1rem);
+            right: calc(12.5% + 1rem);
+            height: 1px;
+            background: var(--gray-200);
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 4rem; height: 4rem;
+            background: var(--blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            color: white;
+            margin: 0 auto 1.25rem;
+            border: 3px solid var(--gray-50);
+            box-shadow: 0 0 0 1px var(--gray-200);
+        }
+
+        .step-title {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* DATA SECTION */
+        .data-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .data-visual {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .data-visual-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-500);
+            margin-bottom: 1.25rem;
+        }
+
+        .college-row {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            gap: 0.75rem;
+        }
+
+        .college-row:last-child { border: none; }
+
+        .college-initial {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .college-info { flex: 1; }
+        .college-name { font-size: 0.82rem; font-weight: 600; color: var(--gray-900); }
+        .college-meta { font-size: 0.72rem; color: var(--gray-500); }
+
+        .college-rate {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-700);
+        }
+
+        .college-bar-wrap {
+            width: 80px;
+            height: 4px;
+            background: var(--gray-100);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .college-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--blue);
+        }
+
+        .data-content h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .data-content p {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .data-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .data-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .bullet-check {
+            width: 20px; height: 20px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* PRIVACY SECTION */
+        .privacy-section {
+            background: var(--gray-900);
+            color: white;
+            padding: 6rem 2rem;
+        }
+
+        .privacy-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .privacy-content h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .privacy-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .privacy-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .privacy-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .privacy-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+        .privacy-card-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: white;
+        }
+
+        .privacy-card-desc {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .privacy-roles {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .role-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        .role-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .role-label { font-weight: 600; font-size: 0.9rem; color: white; }
+        .role-access { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+
+        .role-perms {
+            margin-left: auto;
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .perm-tag {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .perm-full { background: rgba(37,99,235,0.3); color: #93c5fd; }
+        .perm-stats { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+        .perm-own { background: rgba(245,158,11,0.2); color: #fcd34d; }
+
+        /* PRICING */
+        .pricing-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            background: white;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.25rem 0.85rem;
+            border-radius: 100px;
+        }
+
+        .pricing-tier {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-family: var(--serif);
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--gray-900);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-price sup {
+            font-size: 1.5rem;
+            vertical-align: top;
+            margin-top: 0.5rem;
+        }
+
+        .pricing-period {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            margin-bottom: 1.75rem;
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+
+        .pricing-feature svg { flex-shrink: 0; }
+
+        /* TESTIMONIALS */
+        .testimonials-section {
+            background: var(--blue-light);
+            border-top: 1px solid var(--blue-mid);
+            border-bottom: 1px solid var(--blue-mid);
+            padding: 6rem 2rem;
+        }
+
+        .testimonials-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border: 1px solid var(--blue-mid);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+
+        .testimonial-stars {
+            color: var(--amber);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-quote {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--gray-700);
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .author-avatar {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .author-name { font-weight: 600; font-size: 0.85rem; color: var(--gray-900); }
+        .author-title { font-size: 0.75rem; color: var(--gray-500); }
+
+        /* CTA */
+        .cta-section {
+            padding: 7rem 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: var(--serif);
+            font-size: 3rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-section p {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--gray-900);
+            color: rgba(255,255,255,0.5);
+            padding: 3rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        .footer-copy { font-size: 0.8rem; }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; gap: 3rem; padding: 7rem 1.5rem 4rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-visual { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card-wide { grid-column: span 1; }
+            .steps-grid { grid-template-columns: 1fr 1fr; }
+            .data-grid { grid-template-columns: 1fr; }
+            .privacy-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#" class="nav-logo">
+        <div class="nav-logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+        </div>
+        <span class="nav-logo-text">StrivePlan</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#data">College Data</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-cta">
+        <a href="https://striveplan.vercel.app/login" class="btn btn-ghost">Sign in</a>
+        <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20early%20access" class="btn btn-primary">Request Access</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding-top: 64px;">
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="hero-eyebrow-dot"></div>
+                Built for Independent Consultants
+            </div>
+            <h1>The platform serious consultants <em>actually</em> needed</h1>
+            <p class="hero-sub" style="font-size:1.2rem; font-weight:500; color:var(--gray-700); margin-bottom:0.75rem;">Smarter college planning. Student-led. Consultant-powered.</p>
+            <p class="hero-sub">StrivePlan gives you a complete view of every student — courses, grades, activities, college planning, and communications — in one place. Built by IECs who grew tired of juggling spreadsheets.</p>
+            <div class="hero-actions">
+                <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20early%20access" class="btn btn-primary btn-lg">Request Early Access</a>
+                <a href="#features" class="btn btn-outline btn-lg">See the Platform</a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-avatars">
+                    <div class="trust-avatar" style="background:#2563eb">SC</div>
+                    <div class="trust-avatar" style="background:#7c3aed">MK</div>
+                    <div class="trust-avatar" style="background:#059669">JP</div>
+                    <div class="trust-avatar" style="background:#dc2626">AL</div>
+                </div>
+                <span>Trusted by consultants serving 200+ students across the Bay Area</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="platform-preview">
+                <div class="preview-bar">
+                    <div class="preview-dot" style="background:#ef4444"></div>
+                    <div class="preview-dot" style="background:#f59e0b"></div>
+                    <div class="preview-dot" style="background:#10b981"></div>
+                </div>
+                <div class="preview-header">
+                    <div class="preview-student-name">Maya Chen</div>
+                    <div class="preview-student-meta">Anaheim High School · Class of 2027 · Assigned: Saumya K.</div>
+                    <div class="preview-stats">
+                        <div class="preview-stat">
+                            <span class="preview-stat-val">3.91</span>
+                            <span class="preview-stat-label">UW GPA</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-val">4.42</span>
+                            <span class="preview-stat-label">W GPA</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-val">14</span>
+                            <span class="preview-stat-label">Courses</span>
+                        </div>
+                        <div class="preview-stat">
+                            <span class="preview-stat-val">Mar 20</span>
+                            <span class="preview-stat-label">Next Mtg</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-tabs">
+                    <div class="preview-tab active">Courses & Grades</div>
+                    <div class="preview-tab">Extracurriculars</div>
+                    <div class="preview-tab">College Planning</div>
+                    <div class="preview-tab">Tasks</div>
+                    <div class="preview-tab">Files</div>
+                </div>
+                <div class="preview-body">
+                    <div class="preview-section-label">Grade 11 — Current Year</div>
+                    <div class="preview-course-row">
+                        <span class="preview-course-name">AP US History</span>
+                        <span class="preview-course-type type-ap">AP</span>
+                        <span class="preview-grade grade-a">A−</span>
+                    </div>
+                    <div class="preview-course-row">
+                        <span class="preview-course-name">AP English Language</span>
+                        <span class="preview-course-type type-ap">AP</span>
+                        <span class="preview-grade grade-a">A</span>
+                    </div>
+                    <div class="preview-course-row">
+                        <span class="preview-course-name">Honors Pre-Calculus</span>
+                        <span class="preview-course-type type-honors">Honors</span>
+                        <span class="preview-grade grade-b">B+</span>
+                    </div>
+                    <div class="preview-course-row">
+                        <span class="preview-course-name">AP Chemistry</span>
+                        <span class="preview-course-type type-ap">AP</span>
+                        <span class="preview-grade grade-b">B+</span>
+                    </div>
+                    <div class="preview-course-row">
+                        <span class="preview-course-name">Spanish 3 Honors</span>
+                        <span class="preview-course-type type-honors">Honors</span>
+                        <span class="preview-grade grade-a">A−</span>
+                    </div>
+                </div>
+            </div>
+            <div class="float-badge float-badge-1">
+                <div class="badge-icon" style="background:#d1fae5; font-size:1.1rem;">✓</div>
+                <div>
+                    <div class="badge-text-main">A-G Requirements Met</div>
+                    <div class="badge-text-sub">All UC requirements on track</div>
+                </div>
+            </div>
+            <div class="float-badge float-badge-2">
+                <div class="badge-icon" style="background:#dbeafe; font-size:1.1rem;">🎯</div>
+                <div>
+                    <div class="badge-text-main">12 Colleges Tracked</div>
+                    <div class="badge-text-sub">3 reach · 5 target · 4 likely</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-strip">
+    <div class="logos-label">Students admitted to</div>
+    <div class="logos-row">
+        <span class="logo-school">Stanford</span>
+        <span class="logo-school">UC Berkeley</span>
+        <span class="logo-school">UCLA</span>
+        <span class="logo-school">Cornell</span>
+        <span class="logo-school">Georgetown</span>
+        <span class="logo-school">USC</span>
+        <span class="logo-school">NYU</span>
+    </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+    <div class="section-header fade-in">
+        <span class="section-eyebrow">Platform Features</span>
+        <h2 class="section-title">Everything in one place.<br>Nothing in between.</h2>
+        <p class="section-sub">Stop context-switching between Google Docs, spreadsheets, and email threads. StrivePlan gives every student a single source of truth.</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card feature-card-wide fade-in">
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">Complete Academic Profile</div>
+            <p class="feature-desc">Track courses, grades, and GPA across all four years with automatic weighted and unweighted calculations. A-G requirement tracking, AP course management, dual enrollment, and summer coursework — all in one view. Live GPA updates as you enter grades.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">College Planning</div>
+            <p class="feature-desc">Build and manage each student's college list with reach/target/likely categorization. Track application deadlines, essay requirements, and decision outcomes in real time.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon">🏆</div>
+            <div class="feature-title">Extracurricular Tracker</div>
+            <p class="feature-desc">Log every activity, role, hours, and accomplishment. Competitive programs, community service, athletics — structured so you can build a compelling narrative for each student.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon">💬</div>
+            <div class="feature-title">Family Communications</div>
+            <p class="feature-desc">Integrated messaging and meeting notes. Keep parent communication organized at the family level — siblings share parent records so you never duplicate data.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon">📁</div>
+            <div class="feature-title">Document Management</div>
+            <p class="feature-desc">Shared files visible to students and families. Private consultant-only strategy notes and parent communication logs. Clean separation between what you share and what you don't.</p>
+        </div>
+        <div class="feature-card fade-in">
+            <div class="feature-icon">🧭</div>
+            <div class="feature-title">Career & Interest Mapping</div>
+            <p class="feature-desc">Track student interests, intended majors, and career pathways. Connect academic choices to long-term goals so your guidance stays holistic and forward-looking.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+    <div class="how-inner">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Set up in minutes.<br>Run your practice from day one.</h2>
+        </div>
+        <div class="steps-grid">
+            <div class="step fade-in">
+                <div class="step-number">1</div>
+                <div class="step-title">Create Your Practice</div>
+                <p class="step-desc">Set up your company, add consultants, configure roles and permissions in minutes.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">2</div>
+                <div class="step-title">Add Your Students</div>
+                <p class="step-desc">Import existing student data or build profiles from scratch. Assign consultants to students instantly.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">3</div>
+                <div class="step-title">Build Their Profile</div>
+                <p class="step-desc">Add courses, grades, activities, and college list. The platform calculates GPAs and tracks requirements automatically.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">4</div>
+                <div class="step-title">Share With Families</div>
+                <p class="step-desc">Students and parents get their own view. They see what you share — nothing more, nothing less.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DATA SECTION -->
+<section class="data-section" id="data">
+    <div class="data-grid">
+        <div class="data-visual fade-in">
+            <div class="data-visual-title">Live College Database — Updated Monthly</div>
+            <div class="college-row">
+                <div class="college-initial" style="background:#dbeafe; color:#1d4ed8;">S</div>
+                <div class="college-info">
+                    <div class="college-name">Stanford University</div>
+                    <div class="college-meta">4% admit rate · $57,693 avg net price</div>
+                </div>
+                <div>
+                    <div class="college-rate">4.0%</div>
+                    <div class="college-bar-wrap"><div class="college-bar" style="width:4%"></div></div>
+                </div>
+            </div>
+            <div class="college-row">
+                <div class="college-initial" style="background:#fef3c7; color:#92400e;">B</div>
+                <div class="college-info">
+                    <div class="college-name">UC Berkeley</div>
+                    <div class="college-meta">14% admit rate · $14,312 avg net price</div>
+                </div>
+                <div>
+                    <div class="college-rate">14%</div>
+                    <div class="college-bar-wrap"><div class="college-bar" style="width:14%"></div></div>
+                </div>
+            </div>
+            <div class="college-row">
+                <div class="college-initial" style="background:#d1fae5; color:#065f46;">G</div>
+                <div class="college-info">
+                    <div class="college-name">Georgetown University</div>
+                    <div class="college-meta">12% admit rate · $28,900 avg net price</div>
+                </div>
+                <div>
+                    <div class="college-rate">12%</div>
+                    <div class="college-bar-wrap"><div class="college-bar" style="width:12%"></div></div>
+                </div>
+            </div>
+            <div class="college-row">
+                <div class="college-initial" style="background:#ede9fe; color:#5b21b6;">U</div>
+                <div class="college-info">
+                    <div class="college-name">University of Michigan</div>
+                    <div class="college-meta">18% admit rate · $16,200 avg net price</div>
+                </div>
+                <div>
+                    <div class="college-rate">18%</div>
+                    <div class="college-bar-wrap"><div class="college-bar" style="width:18%"></div></div>
+                </div>
+            </div>
+            <div class="college-row">
+                <div class="college-initial" style="background:#fee2e2; color:#991b1b;">U</div>
+                <div class="college-info">
+                    <div class="college-name">USC</div>
+                    <div class="college-meta">9% admit rate · $34,100 avg net price</div>
+                </div>
+                <div>
+                    <div class="college-rate">9%</div>
+                    <div class="college-bar-wrap"><div class="college-bar" style="width:9%"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="data-content fade-in">
+            <span class="section-eyebrow">Proprietary College Database</span>
+            <h2>Fresh data. Every month. No manual updates.</h2>
+            <p>We pull from College Scorecard, IPEDS, and Common Data Sets so your college recommendations are always grounded in current data — not last year's PDF you downloaded and forgot about.</p>
+            <ul class="data-bullets">
+                <li class="data-bullet">
+                    <div class="bullet-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    Admission rates, yield, and enrollment data
+                </li>
+                <li class="data-bullet">
+                    <div class="bullet-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    Net price and financial aid by income band
+                </li>
+                <li class="data-bullet">
+                    <div class="bullet-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    Degree prevalence by major
+                </li>
+                <li class="data-bullet">
+                    <div class="bullet-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    Persistence, retention, and transfer rates
+                </li>
+                <li class="data-bullet">
+                    <div class="bullet-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    Batched monthly refresh — no rate limit spikes
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PRIVACY -->
+<div class="privacy-section" id="privacy">
+    <div class="privacy-inner">
+        <div class="privacy-grid">
+            <div class="privacy-content">
+                <span class="section-eyebrow" style="color:#93c5fd;">Privacy & Access Control</span>
+                <h2>Your clients' data stays exactly where it should.</h2>
+                <p>StrivePlan uses role-based access control enforced at the API layer — not just the UI. Admins, assigned consultants, shared consultants, and families each see precisely what they're authorized to see. Nothing more.</p>
+                <div class="privacy-cards">
+                    <div class="privacy-card">
+                        <div class="privacy-card-icon">🔒</div>
+                        <div class="privacy-card-title">CCPA Compliant</div>
+                        <div class="privacy-card-desc">Built for California families. Explicit consent at onboarding.</div>
+                    </div>
+                    <div class="privacy-card">
+                        <div class="privacy-card-icon">📋</div>
+                        <div class="privacy-card-title">Audit Logging</div>
+                        <div class="privacy-card-desc">Every data access recorded with timestamp and user ID.</div>
+                    </div>
+                    <div class="privacy-card">
+                        <div class="privacy-card-icon">🔐</div>
+                        <div class="privacy-card-title">Encrypted at Rest</div>
+                        <div class="privacy-card-desc">Student PII encrypted in storage and in transit.</div>
+                    </div>
+                    <div class="privacy-card">
+                        <div class="privacy-card-icon">🚫</div>
+                        <div class="privacy-card-title">No Cross-Company Access</div>
+                        <div class="privacy-card-desc">Your students are never visible to other IEC firms.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="privacy-roles">
+                <div class="role-row">
+                    <div class="role-icon" style="background:rgba(37,99,235,0.3);">👑</div>
+                    <div>
+                        <div class="role-label">Admin</div>
+                        <div class="role-access">Full platform access</div>
+                    </div>
+                    <div class="role-perms">
+                        <span class="perm-tag perm-full">Full Access</span>
+                    </div>
+                </div>
+                <div class="role-row">
+                    <div class="role-icon" style="background:rgba(16,185,129,0.2);">👤</div>
+                    <div>
+                        <div class="role-label">Assigned Consultant</div>
+                        <div class="role-access">Own students — full PII + strategy notes</div>
+                    </div>
+                    <div class="role-perms">
+                        <span class="perm-tag perm-own">Own Students</span>
+                    </div>
+                </div>
+                <div class="role-row">
+                    <div class="role-icon" style="background:rgba(245,158,11,0.2);">👥</div>
+                    <div>
+                        <div class="role-label">Shared Consultant</div>
+                        <div class="role-access">Stats only — no name, contact, or essays</div>
+                    </div>
+                    <div class="role-perms">
+                        <span class="perm-tag perm-stats">Stats Only</span>
+                    </div>
+                </div>
+                <div class="role-row">
+                    <div class="role-icon" style="background:rgba(124,58,237,0.2);">👨‍👩‍👧</div>
+                    <div>
+                        <div class="role-label">Parent / Student</div>
+                        <div class="role-access">Own profile — shared files only</div>
+                    </div>
+                    <div class="role-perms">
+                        <span class="perm-tag perm-stats">Own Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials-section">
+    <div class="testimonials-inner">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">From Consultants</span>
+            <h2 class="section-title">What the early cohort is saying</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"I used to spend 20% of my time just keeping track of where each student was. StrivePlan eliminated that entirely. My notes, their grades, the college list — it's all right there."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:#2563eb;">SK</div>
+                    <div>
+                        <div class="author-name">Saumya K.</div>
+                        <div class="author-title">College Consultant · Bay Area</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"The family-level parent profiles are a game changer. I have siblings at the same school — I stopped entering parent contact info twice. Small thing, huge in practice."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:#059669;">KM</div>
+                    <div>
+                        <div class="author-name">Katty M.</div>
+                        <div class="author-title">Senior Consultant · Marin County</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-quote">"The college database alone is worth it. I used to pull Common Data Set PDFs manually. Now I get current admission rates, net price, and major data in one place."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background:#7c3aed;">MR</div>
+                    <div>
+                        <div class="author-name">Maiya R.</div>
+                        <div class="author-title">Consultant · East Bay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+    <div class="section-header fade-in">
+        <span class="section-eyebrow">Pricing</span>
+        <h2 class="section-title">Simple, transparent pricing.<br>Scales with your practice.</h2>
+        <p class="section-sub">No setup fees. No long-term contracts. Cancel any time.</p>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="pricing-card fade-in">
+            <div class="pricing-tier">Solo</div>
+            <div class="pricing-price"><sup>$</sup>79</div>
+            <div class="pricing-period">per month · up to 25 students</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    1 consultant seat
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Full student profile suite
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    College database access
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Parent/student portal
+                </li>
+            </ul>
+            <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20Solo%20plan%20interest" class="btn btn-outline" style="width:100%; justify-content:center;">Get Started</a>
+        </div>
+
+        <div class="pricing-card featured fade-in">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-tier">Practice</div>
+            <div class="pricing-price"><sup>$</sup>199</div>
+            <div class="pricing-period">per month · up to 100 students</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#dbeafe"/><path d="M5 8l2 2 4-4" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Up to 5 consultant seats
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#dbeafe"/><path d="M5 8l2 2 4-4" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Everything in Solo
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#dbeafe"/><path d="M5 8l2 2 4-4" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Role-based access control
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#dbeafe"/><path d="M5 8l2 2 4-4" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Shared consultant profiles
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#dbeafe"/><path d="M5 8l2 2 4-4" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Audit logs & admin dashboard
+                </li>
+            </ul>
+            <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20Practice%20plan%20interest" class="btn btn-primary" style="width:100%; justify-content:center;">Get Started</a>
+        </div>
+
+        <div class="pricing-card fade-in">
+            <div class="pricing-tier">Enterprise</div>
+            <div class="pricing-price" style="font-size:2rem; padding-top:0.5rem;">Custom</div>
+            <div class="pricing-period">Unlimited students · volume pricing</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Unlimited consultant seats
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Everything in Practice
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Dedicated onboarding
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Priority support & SLA
+                </li>
+                <li class="pricing-feature">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#d1fae5"/><path d="M5 8l2 2 4-4" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    SOC2 documentation
+                </li>
+            </ul>
+            <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20Enterprise%20inquiry" class="btn btn-ghost" style="width:100%; justify-content:center; border:1px solid var(--gray-200);">Contact Sales</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<div style="background:var(--gray-50); border-top:1px solid var(--gray-200);">
+    <div class="cta-section fade-in">
+        <span class="section-eyebrow">Early Access</span>
+        <h2>Built by a consulting firm. Refined for yours.</h2>
+        <p>StrivePlan was born out of StrivePath — a 200+ student practice that needed better tools. We built what didn't exist. Now we're opening it to the broader IEC community.</p>
+        <div class="cta-actions">
+            <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20early%20access" class="btn btn-primary btn-lg">Request Early Access</a>
+            <a href="mailto:sunny@striveplan.io?subject=StrivePlan%20demo%20request" class="btn btn-outline btn-lg">Schedule a Demo</a>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">StrivePlan</div>
+        <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="mailto:sunny@striveplan.io">Contact</a></li>
+        </ul>
+        <div class="footer-copy">© 2026 StrivePlan. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, (entry.target.dataset.delay || 0) * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+        el.dataset.delay = i % 4;
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
