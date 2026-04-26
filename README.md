@@ -1,6 +1,6 @@
 # striveplan-www
 
-Marketing site for StrivePlan. Lives at https://striveplan.io (eventually). The product app lives in the [`striveplan`](https://github.com/sunnystrivepath/striveplan) repo and runs at https://striveplan.vercel.app.
+Marketing site for StrivePlan. Live at https://www.striveplan.io. The product app lives in the [`striveplan`](https://github.com/sunnystrivepath/striveplan) repo and runs at https://app.striveplan.io.
 
 ## What's here
 
